@@ -17,13 +17,21 @@ const mockEvents = [
     "address" : {
       "type" : "Point",
       "coordinates" : [-73.955242, 40.75061]
-  } }},
+  } },
+  "startTime" : "10:00",
+  "endTime" : "18:00",
+  "useAttendeeList" : true,
+  "attendees" : ["Alice", "Bob"],
+  "maxAttendees" : 100},
   { _id: '3', name: 'Food Fair', description: 'Taste cuisines from around the world', date: '2024-08-05', location:{
     "name" : "San Francisco",
     "address" : {
       "type" : "Point",
       "coordinates" : [-122.4192363, 37.7749295]
-  }}},
+  }},
+  "paymentRequired" : true,
+  "paymentAmount" : 20,
+  "paymentDueDate" : "2024-07-15"},
   { _id: '4', name: 'Music Awards', description: 'Music awards show', date: '2024-11-10', location: {
     "name" : "San Francisco",
     "address" : {
@@ -34,8 +42,13 @@ const mockEvents = [
         "name" : "New York",
         "address" : {
         "type" : "Point",
-        "coordinates" : [-73.935242, 40.73061]
-    }}},
+        "coordinates" : [-73.935242, 40.73061],
+       
+    }},
+    "attendees" : ["John", "Jane"],
+    "maxAttendees" : 1000,
+    "startTime" : "10:00",
+    "useAttendeeList" : true,},
     {
         _id: '6', name: 'Wine Tasting', description: 'Sample wines from around the world', date: '2024-06-20', location: {
             "name" : "San Francisco",

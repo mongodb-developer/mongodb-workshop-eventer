@@ -21,10 +21,13 @@ function App() {
   const addEvent = async (newEvent) => {
     //setEvents([...events, { ...newEvent, _id: Date.now().toString() }]);
     console.log(newEvent)
-    newEvent.location = JSON.parse(newEvent.location);
+    // newEvent.location = JSON.parse(newEvent.location);
     const insertedDoc = await axios.post('http://localhost:5000/api/events', newEvent);
     setEvents([...events, { ...newEvent, _id: insertedDoc.data.insertedId }]);
   };
+
+  
+
 
   const updateEvent = async (updatedEvent) => {
     //setEvents(events.map(event => event._id === updatedEvent._id ? updatedEvent : event));
@@ -89,15 +92,25 @@ function App() {
   
           </select>
 
-          
-        <EventForm 
-          onSubmit={editingEvent ? updateEvent : addEvent} 
-          initialEvent={editingEvent} 
-        />
+          <details className="mt-6 bg-white shadow-md rounded-lg overflow-hidden">
+          <summary className="text-lg font-semibold text-mongodb-dark-gray bg-gray-50 px-4 py-3 cursor-pointer hover:bg-gray-100 transition-colors duration-200 flex justify-between items-center">
+            <span>Add/Edit Event</span>
+            <svg className="w-5 h-5 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </summary>
+          <div className="p-4">
+            <EventForm 
+              onSubmit={editingEvent ? updateEvent : addEvent} 
+              initialEvent={editingEvent} 
+            />
+          </div>
+        </details>
         <EventList 
           events={events} 
           onDelete={deleteEvent} 
-          onEdit={setEditingEvent} 
+          onEdit={setEditingEvent}
+          onRegister={updateEvent}
         />
       </div>
     </div>
@@ -105,3 +118,4 @@ function App() {
 }
 
 export default App;
+
