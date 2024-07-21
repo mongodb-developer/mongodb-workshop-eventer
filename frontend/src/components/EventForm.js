@@ -5,9 +5,25 @@ function EventForm({ onSubmit, initialEvent = null }) {
     name: '',
     description: '',
     date: '',
-    location: '{"name": "San Francisco","address": {"type": "Point", "coordinates": [-122.4194, 37.7749]}}'
+    location: locations[0]
     
   });
+
+  locations = [
+    {
+        "name": "San Francisco",
+        "address": {
+            "type": "Point",
+            "coordinates": [-122.4194, 37.7749]
+            }
+    },
+    {
+        "name": "New York",
+        "address": {
+            "type": "Point",
+            "coordinates": [-74.006, 40.7128]
+            }
+    }]
 
   useEffect(() => {
     if (initialEvent) {
@@ -18,7 +34,7 @@ function EventForm({ onSubmit, initialEvent = null }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(eventData);
-    setEventData({ name: '', description: '', date: '', location: '' });
+    setEventData({ name: '', description: '', date: '', location: locations[0] });
   };
 
   const handleChange = (e) => {
@@ -77,24 +93,16 @@ function EventForm({ onSubmit, initialEvent = null }) {
             name="location"
             id="location"
             value={eventData.location.name}
-            onChange={handleChange}
+            onChange={() => {
+                fullLocation = locations.find(location => location.name === e.target.value);
+                handleChange({ target: { name: 'location', value: fullLocation } });
+                
+            }}
             required
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-mongodb-green focus:ring focus:ring-mongodb-green focus:ring-opacity-50"
             >
-            <option value='{
-            "name": "San Francisco",
-            "address": {
-              "type": "Point",
-              "coordinates": [-122.4194, 37.7749]
-            }
-          }'>San Francisco</option>
-          <option value='{
-            "name": "New York",
-            "address": {
-              "type": "Point",
-              "coordinates": [-74.006, 40.7128]
-            }
-          }'>New York</option>
+            <option value='San Francisco'>San Francisco</option>
+          <option value='New York'>New York</option>
         </select>
       </div>
       <button 
