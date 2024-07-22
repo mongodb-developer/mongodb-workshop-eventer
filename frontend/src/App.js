@@ -110,7 +110,7 @@ function App() {
           events={events} 
           onDelete={deleteEvent} 
           onEdit={setEditingEvent}
-          onRegister={updateEvent}
+          onRegisterUser={updateEvent}
         />
       </div>
     </div>
