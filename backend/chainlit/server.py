@@ -24,37 +24,9 @@ global collection
 collection = db['events']
 
 
-def getContext(embedding):
-    docs= []
-    docs = list(collection.aggregate([
-        {
-            '$vectorSearch': {
-                'index': 'vector_index', 
-                'queryVector': embedding, 
-                'path': 'embedding', 
-                'numCandidates' : 20,
-                'limit' : 10
-            }},
-            { '$project' : {'embedding'  : 0} }
-    ]))
-    return docs
-
-
-async def getEmbedding(query):
-
-    queryVector =  await client.embeddings.create(
-        model="text-embedding-3-small",
-        input=query,
-    )
-    query_vec = queryVector.data[0].embedding
-   
-    return query_vec
-
-
 @cl.on_message
 async def on_message(message: cl.Message):
-    embedding = await getEmbedding(message.content)
-    context = getContext(embedding)
+    context = "Generic knowldege"
     history = cl.chat_context.to_openai()
     history.append({"role": "user", "content": f" With the relevant context: {context} \n Assist with to the user message {message.content}. If you don't see the details in cotext please respond that you could not find any details for that query."})
     input_messages=[
