@@ -14,7 +14,7 @@ function App() {
   }, []);
 
   const getAllEvents = async () => {
-    const { data } = await axios.get('http://localhost:5000/api/events');
+    const { data } = await axios.get(`${process.env.BACKEND_URL}/api/events`);
     setEvents(data);
   };
 
@@ -22,7 +22,7 @@ function App() {
     //setEvents([...events, { ...newEvent, _id: Date.now().toString() }]);
     console.log(newEvent)
     // newEvent.location = JSON.parse(newEvent.location);
-    const insertedDoc = await axios.post('http://localhost:5000/api/events', newEvent);
+    const insertedDoc = await axios.post(`${process.env.BACKEND_URL}/api/events`, newEvent);
     setEvents([...events, { ...newEvent, _id: insertedDoc.data.insertedId }]);
   };
 
@@ -31,14 +31,14 @@ function App() {
 
   const updateEvent = async (updatedEvent) => {
     //setEvents(events.map(event => event._id === updatedEvent._id ? updatedEvent : event));
-    const newEvent = await axios.put(`http://localhost:5000/api/events/${updatedEvent._id}`, updatedEvent);
+    const newEvent = await axios.put(`${process.env.BACKEND_URL}/api/events/${updatedEvent._id}`, updatedEvent);
      
     setEvents(events.map(event => event._id === updatedEvent._id ? newEvent.data : event));
     setEditingEvent(null);
   };
 
   const deleteEvent = async(id) => {
-    await axios.delete(`http://localhost:5000/api/events/${id}`);
+    await axios.delete(`${process.env.BACKEND_URL}/api/events/${id}`);
     getAllEvents();
   };
 
@@ -48,7 +48,7 @@ function App() {
       return;
     }
 
-    const filteredEvents = await axios.get(`http://localhost:5000/api/events/search/${query}`);
+    const filteredEvents = await axios.get(`${process.env.BACKEND_URL}/api/events/search/${query}`);
     setEvents(filteredEvents.data);
   };
 
@@ -58,7 +58,7 @@ function App() {
     if (query === '')
       getAllEvents();
     else {
-      const filteredEvents = await axios.get(`http://localhost:5000/api/search/location?query=${query}`);
+      const filteredEvents = await axios.get(`${process.env.BACKEND_URL}api/search/location?query=${query}`);
       setEvents(filteredEvents.data);
     }
     
