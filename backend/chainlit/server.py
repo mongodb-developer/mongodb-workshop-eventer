@@ -6,9 +6,6 @@ from pymongo import MongoClient
 import os
 client = AsyncOpenAI()
 
-
-
-
 # Instrument the OpenAI client
 cl.instrument_openai()
 
@@ -23,7 +20,6 @@ db = mdb_client['eventer']
 global collection
 collection = db['events']
 
-
 @cl.on_message
 async def on_message(message: cl.Message):
     context = "Generic knowldege"
@@ -36,9 +32,6 @@ async def on_message(message: cl.Message):
             }]
     #combine arrays of messages
     input_messages = input_messages + history
-    input_messages = input_messages.append({"content": f"Answer user query {message.content}, use context: {context} to answer. If no relevant context provided ask the user to retry",
-                "role": "user"
-    }
     response = await client.chat.completions.create(
         messages=input_messages,
         **settings
