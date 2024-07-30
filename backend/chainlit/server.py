@@ -35,7 +35,10 @@ async def on_message(message: cl.Message):
                 "role": "system"
             }]
     #combine arrays of messages
-    input_messages = input_messages + history 
+    input_messages = input_messages + history
+    input_messages = input_messages.append({"content": f"Answer user query {message.content}, use context: {context} to answer. If no relevant context provided ask the user to retry",
+                "role": "user"
+    }
     response = await client.chat.completions.create(
         messages=input_messages,
         **settings
