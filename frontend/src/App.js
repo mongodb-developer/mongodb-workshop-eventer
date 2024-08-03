@@ -3,6 +3,10 @@ import EventList from './components/EventList';
 import EventForm from './components/EventForm';
 import SearchBar from './components/SearchBar';
 import axios from 'axios';
+// dotevn
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 
 function App() {
@@ -58,7 +62,7 @@ function App() {
     if (query === '')
       getAllEvents();
     else {
-      const filteredEvents = await axios.get(`${process.env.BACKEND_URL}api/search/location?query=${query}`);
+      const filteredEvents = await axios.get(`${process.env.BACKEND_URL}/api/search/location?query=${query}`);
       setEvents(filteredEvents.data);
     }
     
@@ -111,7 +115,7 @@ function App() {
           onDelete={deleteEvent} 
           onEdit={setEditingEvent}
           onRegisterUser={updateEvent}
-        />
+         />
       </div>
     </div>
   );
