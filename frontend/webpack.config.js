@@ -52,6 +52,9 @@ module.exports = {
       "buffer": require.resolve("buffer/"),
       "path": require.resolve("path-browserify"),
       "util": require.resolve("util/"),
+      "crypto": require.resolve("crypto-browserify"),
+      "os": require.resolve("os-browserify"),
+      "vm": require.resolve("vm-browserify"),
     },
   },
   plugins: [
