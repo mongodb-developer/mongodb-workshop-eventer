@@ -13,13 +13,9 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.2",
-<<<<<<< HEAD
     "crypto-browserify": "^3.12.0",
     "dotenv": "^16.4.5",
     "dotenv-webpack": "^8.1.0",
-=======
-    "dotenv": "^16.4.5",
->>>>>>> 7d820b8 (fixes)
     "lucide-react": "^0.412.0",
     "os-browserify": "^0.3.0",
     "react": "^18.3.1",
