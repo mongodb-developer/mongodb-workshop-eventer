@@ -17,7 +17,14 @@ function EventItem({ event, onDelete, onEdit, onRegister }) {
 
   return (
     <div className="bg-gray-50 p-4 rounded-md shadow">
-      <h3 className="text-lg font-semibold text-mongodb-dark-gray">{event.name}</h3>
+      <div className="flex justify-between items-start">
+        <h3 className="text-lg font-semibold text-mongodb-dark-gray">{event.name}</h3>
+        {event.distance && (
+          <span className="bg-mongodb-green text-white text-xs font-semibold px-2 py-1 rounded-full">
+            {event.distance.toFixed(2)/1000} km
+          </span>
+        )}
+      </div>
       <p className="text-gray-600 mt-1">{event.description}</p>
       <p className="text-gray-600 mt-1">Date: {event.date}</p>
       <p className="text-gray-600 mt-1">Time: {event.startTime} - {event.endTime}</p>
